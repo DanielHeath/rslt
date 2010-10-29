@@ -7,9 +7,9 @@ gem install excesselt
 
 class MyStylesheet < ExcessELT::Stylesheet
   def rules
-  	render('parent > child') 	{ builder.p(child_content, :style => "child_content")   }
-  	render('parent') 			{ builder.p(child_content, :style => "parent_content")  }
-    render('text()')    		{ _ node.to_xml.upcase                                 	}
+      render('parent > child')     { builder.p(child_content, :style => "child_content")   }
+      render('parent')             { builder.p(child_content, :style => "parent_content")  }
+      render('text()')             { _ node.to_xml.upcase                                  }
   end
 end
 
