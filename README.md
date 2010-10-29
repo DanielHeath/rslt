@@ -1,45 +1,47 @@
-= Excesselt
+# Excesselt
 
-* http://github.com/DanielHeath/excesselt
+http://github.com/DanielHeath/excesselt
 
-== DESCRIPTION:
+## DESCRIPTION:
 
 Excesselt is a ruby library that I built because I hate XSLT.
+
 I've extracted it from an app I built for my work at Lonely Planet.
+
 Excesselt solves the same problem as XSLT does (that is, how can I transform this xml document into some other format).
 
-== FEATURES/PROBLEMS:
+## FEATURES/PROBLEMS:
 
 Nice syntax.
 Testable, reusable xml transformation
 Tested on REE 1.8.7 - TODO test on more platforms and update this section
 
-== SYNOPSIS:
+## SYNOPSIS:
+    
+    class MyStylesheet < ExcessELT::Stylesheet
+      def rules
+        render('parent > child')     { builder.p(child_content, :style => "child_content")   }
+        render('parent')             { builder.p(child_content, :style => "parent_content")  }
+        render('text()')             { _ node.to_xml.upcase                                      }
+      end
+    end
+    
+    MyStylesheet.transform <<-XML
+    <parent>
+      <child>Some Text</child>
+    </parent>
+    XML
+    -> <p style="parent_content"><p style="child_content">SOME TEXT</p></p>
 
-class MyStylesheet < ExcessELT::Stylesheet
-  def rules
-      render('parent > child')     { builder.p(child_content, :style => "child_content")   }
-      render('parent')             { builder.p(child_content, :style => "parent_content")  }
-      render('text()')             { _ node.to_xml.upcase                                  }
-  end
-end
-
-MyStylesheet.transform <<-XML
-<parent>
-  <child>Some Text</child>
-</parent>
-XML
--> <p style="parent_content"><p style="child_content">SOME TEXT</p></p>
-
-== REQUIREMENTS:
+## REQUIREMENTS:
 
 * Nokogiri, Builder
 
-== INSTALL:
+## INSTALL:
 
 * gem install excesselt
 
-== LICENSE:
+## LICENSE:
 
 (The MIT License)
 
