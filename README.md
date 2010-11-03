@@ -2,6 +2,8 @@
 
 http://github.com/DanielHeath/excesselt
 
+*NOTE* I haven't finished extracting this from my work project as yet. The gem hasn't been published, the code doesn't work.
+
 ## DESCRIPTION:
 
 Excesselt is a ruby library that I built because I hate XSLT.
