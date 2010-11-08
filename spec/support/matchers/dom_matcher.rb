@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'active_support/core_ext/hash/conversions'
 
 RSpec::Matchers.define :match_the_dom_of do |expected_xml_string|
   
@@ -33,14 +34,8 @@ expected actual not to equal expected:
   end
 
   match do |actual_xml_string|
-    begin
-      container_document = Nokogiri::XML("<container/>")
-      expected = container_document.root.add_child(expected_xml_string)
-      actual   = container_document.root.add_child(actual_xml_string)
-    rescue NoMethodError
-      # Returns false immediately.
-      next false
-    end
-    expected == actual
+    expected_hash = Hash.from_xml(expected_xml_string.to_s.gsub('  ', '').gsub("\n", ''))
+    actual_hash = Hash.from_xml(actual_xml_string.to_s.gsub('  ', '').gsub("\n", ''))
+    expected_hash == actual_hash
   end
 end

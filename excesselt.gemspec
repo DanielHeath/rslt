@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency('nokogiri', '1.4.3.1')
   s.add_dependency('builder', '2.1.2')
+  s.add_development_dependency('activesupport')
   s.add_development_dependency('rake')
   s.add_development_dependency('rspec', '>2.0.0')
   s.add_development_dependency('rcov')
