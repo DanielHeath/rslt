@@ -23,10 +23,6 @@ module Excesselt
         raise e.exception("Error delegating method '#{sym}' to #{@element.class.name}: #{e.message}\n\n#{e.backtrace.join("\n")}")
       end
     end
-
-    def _(*args)
-      add(*args)
-    end
   
     def add(*content)
       @builder << content.join('')

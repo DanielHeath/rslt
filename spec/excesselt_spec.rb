@@ -3,16 +3,29 @@ require File.dirname(__FILE__) + '/spec_helper.rb'
 describe "excesselt" do
   
   describe "When a developer wants to transform their hello world xml" do
+        
     before do
+    
+      module TestHelper
+        def error_text_in_parent
+          error("Text is not allowed within a parent node!") unless (text.strip == '')
+        end
+        def uppercase_text
+          add text.upcase
+        end
+        def text
+          self.to_xml
+        end
+      end
       
       @stylesheet = Class.new(Excesselt::Stylesheet) do
         def rules
           render('parent > child')     { builder.p(:style => "child_content" ) { child_content }  }
-          render('parent')             { builder.p(:style => "parent_content") { child_content }  }
-          render('parent > text()')    { 
-            error("Text is not allowed within a parent node!") unless (element.to_s.strip == '')
-          }
-          render('text()')             { _ self.to_xml.upcase                                     }
+          render('parent')             { builder.p(:style => "parent_content") { child_content }  }          
+          helper TestHelper do
+            render('parent > text()', :with => :error_text_in_parent)
+            render('text()', :with => :uppercase_text)
+          end
         end
       end
       
