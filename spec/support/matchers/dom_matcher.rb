@@ -33,9 +33,13 @@ expected actual not to equal expected:
   MESSAGE
   end
 
+  def hash_for(string)
+    Hash.from_xml("<container>#{string.to_s.gsub('  ', '').gsub("\n", '')}</container>")['container']
+  end
+  
   match do |actual_xml_string|
-    expected_hash = Hash.from_xml(expected_xml_string.to_s.gsub('  ', '').gsub("\n", ''))
-    actual_hash = Hash.from_xml(actual_xml_string.to_s.gsub('  ', '').gsub("\n", ''))
+    expected_hash = hash_for(expected_xml_string)
+    actual_hash = hash_for(actual_xml_string)
     expected_hash == actual_hash
   end
 end

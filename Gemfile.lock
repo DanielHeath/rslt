@@ -2,7 +2,6 @@ PATH
   remote: .
   specs:
     excesselt (0.0.1)
-      activesupport
       builder (= 2.1.2)
       nokogiri (= 1.4.3.1)
 

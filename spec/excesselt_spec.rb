@@ -9,9 +9,9 @@ describe "excesselt" do
       
       @stylesheet = Class.new(Excesselt::Stylesheet) do
         def rules
-          render('parent > child')     { builder.p(child_content, :style => "child_content")  }
-          render('parent')             { builder.p(child_content, :style => "parent_content") }
-          render('text()')             { _ node.to_xml.upcase                                 }
+          render('parent > child')     { builder.p(:style => "child_content" ) { child_content } }
+          render('parent')             { builder.p(:style => "parent_content") { child_content } }
+          render('text()')             { _ self.to_xml.upcase                                    }
         end
       end
       
@@ -36,13 +36,15 @@ describe "excesselt" do
         <parent>
           <parent>
             <child>Goodbye</child>
-          <parent>
+          </parent>
         </parent>
       XML
       expected = <<-EXPECTED
-        <p style="parent_content">
-          <p style="parent_content">
-            <p style="child_content">GOODBYE</p>
+        <p style="parent_content" >
+          <p style="parent_content" >
+            <p style="child_content" >
+              GOODBYE
+            </p>
           </p>            
         </p>
       EXPECTED
