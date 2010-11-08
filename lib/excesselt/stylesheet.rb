@@ -1,7 +1,7 @@
 module Excesselt
   class Stylesheet
   
-    attr_reader :builder
+    attr_reader :builder, :errors
   
     def self.transform(xml)
       self.new.transform(xml)
@@ -10,6 +10,7 @@ module Excesselt
     def initialize
       @builder = Builder::XmlMarkup.new
       @helper_modules = []
+      @errors = []
     end
   
     def transform(xml)

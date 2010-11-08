@@ -5,13 +5,14 @@ describe "excesselt" do
   describe "When a developer wants to transform their hello world xml" do
     before do
       
-      @xml = 
-      
       @stylesheet = Class.new(Excesselt::Stylesheet) do
         def rules
-          render('parent > child')     { builder.p(:style => "child_content" ) { child_content } }
-          render('parent')             { builder.p(:style => "parent_content") { child_content } }
-          render('text()')             { _ self.to_xml.upcase                                    }
+          render('parent > child')     { builder.p(:style => "child_content" ) { child_content }  }
+          render('parent')             { builder.p(:style => "parent_content") { child_content }  }
+          render('parent > text()')    { 
+            error("Text is not allowed within a parent node!") unless (element.to_s.strip == '')
+          }
+          render('text()')             { _ self.to_xml.upcase                                     }
         end
       end
       
@@ -50,6 +51,22 @@ describe "excesselt" do
       EXPECTED
       @stylesheet.transform(xml).should match_the_dom_of(expected)
     end
+
+    describe "error handling" do
+      it "should record errors encountered during processing" do
+        xml = <<-XML
+          <parent> foo
+            <parent>
+              <child>Goodbye</child>
+            </parent>
+          </parent>
+        XML
+        @instance = @stylesheet.new
+        @instance.transform(xml)
+        @instance.errors.should == ["Text is not allowed within a parent node!"]
+      end
+    end
+
   end
   
 end

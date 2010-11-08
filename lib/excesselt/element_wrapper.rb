@@ -31,11 +31,10 @@ module Excesselt
     def add(*content)
       @builder << content.join('')
     end
- 
-# TODO: Port Error handling from LP version!
-#    def error(string)
-#      stylesheet.errors << string
-#    end
+    
+    def error(string)
+      stylesheet.errors << string
+    end
         
   end
 
