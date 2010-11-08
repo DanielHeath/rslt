@@ -15,10 +15,6 @@ module Excesselt
         stylesheet.generate_element(child)
       end
     end
-    
-    def render_text
-      false
-    end
   
     def method_missing(sym, *args)
       begin
@@ -35,10 +31,11 @@ module Excesselt
     def add(*content)
       @builder << content.join('')
     end
-    
-    def error(string)
-      stylesheet.errors << string
-    end
+ 
+# TODO: Port Error handling from LP version!
+#    def error(string)
+#      stylesheet.errors << string
+#    end
         
   end
 
