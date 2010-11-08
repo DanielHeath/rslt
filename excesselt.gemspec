@@ -1,9 +1,7 @@
-version = File.read(File.expand_path("../VERSION",__FILE__)).strip
-
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'excesselt'
-  s.version     = version
+  s.version     = '0.0.1'
   s.summary     = 'Helps you to transform XML without using XSLT.'
   s.description = 'I had a lot of XML transformation to do and the requirements kept changing, so I sat down and wrote something that was easy to modify.'
 
@@ -14,8 +12,9 @@ Gem::Specification.new do |s|
   s.email             = 'daniel.r.heath@gmail.com'
   s.homepage          = 'http://www.github.com/danielheath/excesselt'
 
+# Would be good to take a stylesheet and an xml file as arguments for a binary.
   s.bindir             = 'bin'
-#  s.executables        = ['excesselt']
+#  s.executables        = ['excesselt'] 
 #  s.default_executable = 'excesselt'
 
   s.add_dependency('nokogiri', '1.4.3.1')
