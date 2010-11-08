@@ -41,11 +41,11 @@ end
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
+  version = Excesselt::VERSION
+  rdoc.main = "README.md"
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "<%= project_name %> #{version}"
-  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('README.md')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
