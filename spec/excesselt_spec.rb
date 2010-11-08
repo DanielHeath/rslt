@@ -23,6 +23,7 @@ describe "excesselt" do
           render('parent > child')     { builder.p(:style => "child_content" ) { child_content }  }
           render('parent')             { builder.p(:style => "parent_content") { child_content }  }          
           helper TestHelper do
+            render('parent.explode > text()', :with => :a_method_that_doesnt_exist)
             render('parent > text()', :with => :error_text_in_parent)
             render('text()', :with => :uppercase_text)
           end
@@ -68,16 +69,20 @@ describe "excesselt" do
     describe "error handling" do
       it "should record errors encountered during processing" do
         xml = <<-XML
-          <parent> foo
-            <parent>
-              <child>Goodbye</child>
-            </parent>
-          </parent>
+          <parent>foo</parent>
         XML
         @instance = @stylesheet.new
         @instance.transform(xml)
         @instance.errors.should == ["Text is not allowed within a parent node!"]
       end
+      it "should record errors encountered during processing" do
+        xml = <<-XML
+          <parent class="explode">foo</parent>
+        XML
+        @instance = @stylesheet.new
+        lambda { @instance.transform(xml) }.should raise_exception {|e| e.message.should =~ /With Included Modules: \[TestHelper\]/}
+      end
+      
     end
 
   end

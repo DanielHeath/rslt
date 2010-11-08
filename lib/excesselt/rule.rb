@@ -34,7 +34,11 @@ module Excesselt
       @extensions.each {|e| wrapper.extend e }
       wrapper.instance_eval(&@block)
     rescue Exception => e
-      raise e.class, e.message + "\nIncluded Modules: #{@extensions.inspect}\n" + e.backtrace.join("\n")
+      if e.message =~ /With Included Modules/
+        raise e
+      else
+        raise e.class, "With Included Modules: #{@extensions.inspect}\n#{e.message}\n#{e.backtrace.join("\n")}"
+      end
     end
     
   end
