@@ -22,18 +22,18 @@ Tested on REE 1.8.7 - TODO test on more platforms and update this section
     
     class MyStylesheet < ExcessELT::Stylesheet
       def rules
-        render('parent > child')     { builder.p(child_content, :style => "child_content")   }
-        render('parent')             { builder.p(child_content, :style => "parent_content")  }
-        render('text()')             { _ node.to_xml.upcase                                      }
+        render('parent > child')     { builder.p(:style => "child_content" ) { child_content }  }
+        render('parent')             { builder.p(:style => "parent_content") { child_content }  }
+        render('text()')             { add element.to_xml.upcase                                }
       end
     end
     
     MyStylesheet.transform <<-XML
     <parent>
-      <child>Some Text</child>
+      <child>Use Excesselt</child>
     </parent>
     XML
-    -> <p style="parent_content"><p style="child_content">SOME TEXT</p></p>
+    -> <p style="parent_content"><p style="child_content">USE EXCESSELT</p></p>
 
 ## REQUIREMENTS:
 
