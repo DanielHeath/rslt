@@ -2,8 +2,6 @@
 
 http://github.com/DanielHeath/excesselt
 
-*NOTE* I haven't finished extracting this from my work project as yet. The gem hasn't been published, the code doesn't work.
-
 ## DESCRIPTION:
 
 Excesselt is a ruby library that I built because I hate XSLT.
@@ -20,7 +18,7 @@ Tested on REE 1.8.7 - TODO test on more platforms and update this section
 
 ## SYNOPSIS:
     
-    class MyStylesheet < ExcessELT::Stylesheet
+    class MyStylesheet < Excesselt::Stylesheet
       def rules
         render('parent > child')     { builder.p(:style => "child_content" ) { child_content }  }
         render('parent')             { builder.p(:style => "parent_content") { child_content }  }

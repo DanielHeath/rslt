@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    excesselt (0.0.1)
+    excesselt (1.0.0)
       builder (= 2.1.2)
       nokogiri (= 1.4.3.1)
 
@@ -12,6 +12,13 @@ GEM
     builder (2.1.2)
     columnize (0.3.1)
     diff-lcs (1.1.2)
+    gemcutter (0.6.1)
+    git (1.2.5)
+    jeweler (1.4.0)
+      gemcutter (>= 0.1.0)
+      git (>= 1.2.5)
+      rubyforge (>= 2.0.0)
+    json_pure (1.4.6)
     linecache (0.43)
     nokogiri (1.4.3.1)
     rake (0.8.7)
@@ -31,6 +38,8 @@ GEM
       ruby-debug-base (~> 0.10.3.0)
     ruby-debug-base (0.10.3)
       linecache (>= 0.3)
+    rubyforge (2.0.4)
+      json_pure (>= 1.1.7)
 
 PLATFORMS
   ruby
@@ -39,6 +48,7 @@ DEPENDENCIES
   activesupport
   builder (= 2.1.2)
   excesselt!
+  jeweler
   nokogiri (= 1.4.3.1)
   rake
   rcov
