@@ -1,3 +1,4 @@
+require 'builder'
 module Excesselt
   class Stylesheet
   
