@@ -28,21 +28,6 @@ Gem::Specification.new do |s|
      "lib/excesselt/element_wrapper.rb",
      "lib/excesselt/rule.rb",
      "lib/excesselt/stylesheet.rb",
-     "rdoc/classes/Excesselt.html",
-     "rdoc/classes/Excesselt/ElementWrapper.html",
-     "rdoc/classes/Excesselt/Rule.html",
-     "rdoc/classes/Excesselt/Stylesheet.html",
-     "rdoc/created.rid",
-     "rdoc/files/README_md.html",
-     "rdoc/files/lib/excesselt/element_wrapper_rb.html",
-     "rdoc/files/lib/excesselt/rule_rb.html",
-     "rdoc/files/lib/excesselt/stylesheet_rb.html",
-     "rdoc/files/lib/excesselt_rb.html",
-     "rdoc/fr_class_index.html",
-     "rdoc/fr_file_index.html",
-     "rdoc/fr_method_index.html",
-     "rdoc/index.html",
-     "rdoc/rdoc-style.css",
      "script/console",
      "script/destroy",
      "script/generate",
@@ -52,7 +37,7 @@ Gem::Specification.new do |s|
      "tasks/rspec.rake"
   ]
   s.homepage = %q{http://www.github.com/danielheath/excesselt}
-  s.rdoc_options = ["--charset=UTF-8"]
+  s.rdoc_options = ["--charset=UTF-8", "-mREADME.md"]
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
   s.rubygems_version = %q{1.3.7}

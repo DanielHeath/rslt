@@ -29,6 +29,8 @@ Jeweler::Tasks.new do |s|
 #  s.executables        = ['excesselt'] 
 #  s.default_executable = 'excesselt'
 
+  s.rdoc_options    = ["--charset=UTF-8", "-mREADME.md"]
+
   s.add_dependency('nokogiri', '1.4.3.1')
   s.add_dependency('builder', '2.1.2')
   s.add_development_dependency('activesupport')
