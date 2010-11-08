@@ -13,7 +13,8 @@ Gem::Specification.new do |s|
   s.description = %q{I had a lot of XML transformation to do and the requirements kept changing, so I sat down and wrote something that was easy to modify.}
   s.email = %q{daniel.r.heath@gmail.com}
   s.extra_rdoc_files = [
-    "README.md"
+    "README.md",
+     "TODO"
   ]
   s.files = [
     ".gitignore",
@@ -23,6 +24,7 @@ Gem::Specification.new do |s|
      "PostInstall.txt",
      "README.md",
      "Rakefile",
+     "TODO",
      "excesselt.gemspec",
      "lib/excesselt.rb",
      "lib/excesselt/element_wrapper.rb",
