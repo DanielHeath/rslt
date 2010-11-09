@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{excesselt}
-  s.version = "1.0.0"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.3.6") if s.respond_to? :required_rubygems_version=
   s.authors = ["Daniel Heath"]
-  s.date = %q{2010-11-08}
+  s.date = %q{2010-11-09}
   s.description = %q{I had a lot of XML transformation to do and the requirements kept changing, so I sat down and wrote something that was easy to modify.}
   s.email = %q{daniel.r.heath@gmail.com}
   s.extra_rdoc_files = [
@@ -48,6 +48,7 @@ Gem::Specification.new do |s|
      "script/console",
      "script/destroy",
      "script/generate",
+     "spec/element_wrapper_spec.rb",
      "spec/excesselt_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/matchers/dom_matcher.rb",
@@ -60,7 +61,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Helps you to transform XML without using XSLT.}
   s.test_files = [
-    "spec/excesselt_spec.rb",
+    "spec/element_wrapper_spec.rb",
+     "spec/excesselt_spec.rb",
      "spec/spec_helper.rb",
      "spec/support/matchers/dom_matcher.rb"
   ]
