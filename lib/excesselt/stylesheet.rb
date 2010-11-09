@@ -7,15 +7,18 @@ module Excesselt
     def self.transform(xml)
       self.new.transform(xml)
     end
-  
-    def initialize
-      @builder = Builder::XmlMarkup.new
-      @helper_modules = []
-      @errors = []
+
+    def initialize(options={})
+      @builder = options[:builder] || Builder::XmlMarkup.new
+      @helper_modules = options[:helper_modules] || []
+      @errors = options[:errors] || []
     end
   
+    # Pass in a string or a Nokogiri Node or Document.
     def transform(xml)
-      generate_element(Nokogiri::XML(xml, nil, nil, Nokogiri::XML::ParseOptions.new).root)
+      xml = xml.root if xml.is_a? Nokogiri::XML::Document
+      xml = Nokogiri::XML(xml, nil, nil, Nokogiri::XML::ParseOptions.new).root unless xml.is_a? Nokogiri::XML::Node
+      generate_element(xml)
     end
 
     def generate_element(element)
