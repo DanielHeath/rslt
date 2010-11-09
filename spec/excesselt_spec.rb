@@ -80,7 +80,7 @@ describe "excesselt" do
           <parent class="explode">foo</parent>
         XML
         @instance = @stylesheet.new
-        lambda { @instance.transform(xml) }.should raise_exception {|e| e.message.should =~ /With Included Modules: \[TestHelper\]/}
+        lambda { @instance.transform(xml) }.should raise_exception {|e| e.message.should =~ /With selector .* and included modules: \[TestHelper\]/}
       end
       
     end
