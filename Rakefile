@@ -35,6 +35,7 @@ Jeweler::Tasks.new do |s|
   s.add_dependency('builder', '2.1.2')
   s.add_development_dependency('activesupport')
   s.add_development_dependency('rake')
+  s.add_development_dependency('i18n')
   s.add_development_dependency('rspec', '>2.0.0')
   s.add_development_dependency('rcov')
   s.add_development_dependency('ruby-debug')
