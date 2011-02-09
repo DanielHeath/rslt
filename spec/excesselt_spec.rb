@@ -67,6 +67,7 @@ describe "excesselt" do
     end
 
     describe "error handling" do
+      
       it "should record errors encountered during processing" do
         xml = <<-XML
           <parent>foo</parent>
@@ -75,12 +76,17 @@ describe "excesselt" do
         @instance.transform(xml)
         @instance.errors.should == ["Text is not allowed within a parent node!"]
       end
+      
       it "should record errors encountered during processing" do
         xml = <<-XML
-          <parent class="explode">foo</parent>
+          <parent><unexpected></unexpected></parent>
         XML
         @instance = @stylesheet.new
-        lambda { @instance.transform(xml) }.should raise_exception {|e| e.message.should =~ /With selector .* and included modules: \[TestHelper\]/}
+        lambda { @instance.transform(xml) }.should raise_exception {|e| 
+          e.message.should =~ /With selector .* and included modules: \[TestHelper\]/
+          e.message.should =~ /There is no style defined to handle element 'unexpected' in this context \(document, parent\)/
+          
+        }
       end
       
     end
