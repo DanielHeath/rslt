@@ -21,7 +21,7 @@ Jeweler::Tasks.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
 
   s.author            = 'Daniel Heath'
-  s.email             = 'daniel.r.heath@gmail.com'
+  s.email             = ['daniel.r.heath@gmail.com']
   s.homepage          = 'http://www.github.com/danielheath/excesselt'
 
 # Would be good to take a stylesheet and an xml file as arguments for a binary.
