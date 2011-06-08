@@ -22,6 +22,7 @@ module Excesselt
     end
 
     def generate_element(element)
+      return '' if element.instance_of? Nokogiri::XML::Comment
       rule = rule_for(element)
       raise "Attempted to generate #{self.name} with parents #{self.parents.inspect} but no rule was found." unless rule
       rule.generate(builder)

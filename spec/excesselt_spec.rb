@@ -45,6 +45,18 @@ describe "excesselt" do
       EXPECTED
       @stylesheet.transform(xml).should match_the_dom_of(expected)
     end
+
+    it "should ignore comments" do
+      xml = <<-XML
+        <parent>
+          <!-- Ignore me -->
+        </parent>
+      XML
+      expected = <<-EXPECTED
+        <p style="parent_content"/>
+      EXPECTED
+      @stylesheet.transform(xml).should match_the_dom_of(expected)
+    end
     
     it "should transform a goodbye document according to a stylesheet" do
       xml = <<-XML
