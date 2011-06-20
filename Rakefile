@@ -32,7 +32,7 @@ Jeweler::Tasks.new do |s|
   s.rdoc_options    = ["--charset=UTF-8", "-mREADME.md"]
 
   s.add_dependency('nokogiri', '~>1')
-  s.add_dependency('builder', '2.1.2')
+  s.add_dependency('builder', '>2')
   s.add_development_dependency('activesupport')
   s.add_development_dependency('rake')
   s.add_development_dependency('i18n')
