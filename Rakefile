@@ -1,13 +1,13 @@
 require 'bundler'
 begin
   Bundler.setup(:default, :development)
+  include Rake::DSL
   Bundler::GemHelper.install_tasks
 rescue Bundler::BundlerError => e
   $stderr.puts e.message
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
-
 require 'jeweler'
 require 'excesselt'
 Jeweler::Tasks.new do |s|
@@ -31,7 +31,7 @@ Jeweler::Tasks.new do |s|
 
   s.rdoc_options    = ["--charset=UTF-8", "-mREADME.md"]
 
-  s.add_dependency('nokogiri', '1.4.3.1')
+  s.add_dependency('nokogiri', '~>1')
   s.add_dependency('builder', '2.1.2')
   s.add_development_dependency('activesupport')
   s.add_development_dependency('rake')
