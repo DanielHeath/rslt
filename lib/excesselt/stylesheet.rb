@@ -35,7 +35,13 @@ module Excesselt
       # Should fold into stylesheet.rules (collection) .find(:matches?, element)
       # TODO: Patch enumerable#find etc to take a plain symbol and some arguments?
       rule = get_rules.find {|rule| rule.matches? element }
-      rule or raise "There is no style defined to handle element '#{element.name}' in this context (#{element.ancestors.map(&:name).reverse.join(", ")})"
+      
+      rule or raise [
+        "There is no style defined to handle this element.",
+        "CSS Path: '#{element.css_path}'",
+        "Xpath: '#{element.path}'",
+        "Context: '#{element.ancestors.map(&:name).reverse.join(", ")}'"
+      ].join("\n")
     end
   
     def helper(*mods, &block)

@@ -95,9 +95,11 @@ describe "excesselt" do
         XML
         @instance = @stylesheet.new
         lambda { @instance.transform(xml) }.should raise_exception {|e| 
-          e.message.should =~ /With selector .* and included modules: \[TestHelper\]/
-          e.message.should =~ /There is no style defined to handle element 'unexpected' in this context \(document, parent\)/
-          
+          e.message.should =~ /With selector '.*' and included modules: \[TestHelper\]/
+          e.message.should =~ /There is no style defined to handle this element/
+          e.message.should =~ /CSS Path: 'parent > unexpected'/
+          e.message.should =~ /Xpath: '\/parent\/unexpected'/
+          e.message.should =~ /Context: 'document, parent'/
         }
       end
       
