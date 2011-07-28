@@ -1,8 +1,9 @@
 PATH
   remote: .
   specs:
-    excesselt (1.1.4)
+    excesselt (1.1.5)
       builder (> 2)
+      excesselt
       nokogiri (~> 1)
 
 GEM
@@ -20,7 +21,7 @@ GEM
       rake
     linecache (0.46)
       rbx-require-relative (> 0.0.4)
-    nokogiri (1.4.6)
+    nokogiri (1.5.0)
     rake (0.9.2)
     rbx-require-relative (0.0.5)
     rcov (0.9.9)
