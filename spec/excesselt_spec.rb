@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
-
+require 'json'
 describe "excesselt" do
 
   describe "When a developer wants to transform their hello world xml" do
@@ -7,8 +7,8 @@ describe "excesselt" do
     before do
 
       module TestHelper
-        def error_text_in_parent
-          error("Text is not allowed within a parent node!") unless (text.strip == '')
+        def error_text_in_parent(options=nil)
+          error("Text is not allowed within a parent node! Options were #{options.to_json}") unless (text.strip == '')
         end
         def uppercase_text
           add text.upcase
@@ -25,7 +25,7 @@ describe "excesselt" do
           helper TestHelper do
             render('parent.explode > text()', :with => :a_method_that_doesnt_exist)
             within 'parent' do
-              render('> text()', :with => :error_text_in_parent)
+              render('> text()', :with => :error_text_in_parent, :passing => 'a custom option')
             end
             render('text()', :with => :uppercase_text)
           end
@@ -88,7 +88,7 @@ describe "excesselt" do
         XML
         @instance = @stylesheet.new
         @instance.transform(xml)
-        @instance.errors.should == ["Text is not allowed within a parent node!"]
+        @instance.errors.should == ['Text is not allowed within a parent node! Options were {"passing":"a custom option"}']
       end
 
       it "should record errors encountered during processing" do

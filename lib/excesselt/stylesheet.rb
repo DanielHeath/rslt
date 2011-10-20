@@ -1,4 +1,6 @@
+require 'active_support/core_ext/hash/except' rescue nil
 require 'builder'
+
 module Excesselt
   class Stylesheet
 
@@ -65,7 +67,15 @@ module Excesselt
       raise "Neither a block nor a :with option were provided for '#{selector}'" unless (opts[:with] or block)
 
       mappings << Rule.new(self, selector_for_current_within + selector, @helper_modules) do
-        opts[:with] ? self.send(opts[:with]) : (instance_eval &block)
+        if opts[:with]
+          if method(opts[:with]).arity == 0
+            self.send(opts[:with])
+          else
+            self.send(opts[:with], opts.except(:with))
+          end
+        else
+          instance_eval &block
+        end
       end
     end
 
