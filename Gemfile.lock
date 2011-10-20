@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    excesselt (1.1.6)
+    excesselt (1.1.7)
       builder (> 2)
       excesselt
       nokogiri (~> 1)
