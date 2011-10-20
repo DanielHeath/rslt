@@ -1,9 +1,9 @@
 require 'builder'
 module Excesselt
   class Stylesheet
-  
+
     attr_reader :builder, :errors
-  
+
     def self.transform(xml)
       self.new.transform(xml)
     end
@@ -12,8 +12,9 @@ module Excesselt
       @builder = options[:builder] || Builder::XmlMarkup.new
       @helper_modules = options[:helper_modules] || []
       @errors = options[:errors] || []
+      @within = []
     end
-  
+
     # Pass in a string or a Nokogiri Node or Document.
     def transform(xml)
       xml = xml.root if xml.is_a? Nokogiri::XML::Document
@@ -35,7 +36,7 @@ module Excesselt
       # Should fold into stylesheet.rules (collection) .find(:matches?, element)
       # TODO: Patch enumerable#find etc to take a plain symbol and some arguments?
       rule = get_rules.find {|rule| rule.matches? element }
-      
+
       rule or raise [
         "There is no style defined to handle this element.",
         "CSS Path: '#{element.css_path}'",
@@ -43,25 +44,35 @@ module Excesselt
         "Context: '#{element.ancestors.map(&:name).reverse.join(", ")}'"
       ].join("\n")
     end
-  
+
     def helper(*mods, &block)
       @helper_modules.push(mods).flatten!
       block.call
       @helper_modules -= [mods].flatten
     end
-    
+
+    def within(selector)
+      @within.push(selector)
+      yield
+      @within.pop
+    end
+
+    def selector_for_current_within
+      @within.join(' ')
+    end
+
     def render(selector, opts={}, &block)
       raise "Neither a block nor a :with option were provided for '#{selector}'" unless (opts[:with] or block)
-            
-      mappings << Rule.new(self, selector, @helper_modules) do
+
+      mappings << Rule.new(self, selector_for_current_within + selector, @helper_modules) do
         opts[:with] ? self.send(opts[:with]) : (instance_eval &block)
       end
     end
-    
+
     def mappings
       @mappings ||= []
     end
-    
+
     def get_rules
       unless @rules_generated
         rules # Generates the mappings
@@ -69,6 +80,6 @@ module Excesselt
       end
       mappings
     end
-  
+
   end
 end
