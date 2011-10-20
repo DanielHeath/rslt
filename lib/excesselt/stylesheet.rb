@@ -60,12 +60,11 @@ module Excesselt
     end
 
     def selector_for_current_within
-      @within.join(' ')
+      @within.map {|e| e + ' '}.join('')
     end
 
     def render(selector, opts={}, &block)
       raise "Neither a block nor a :with option were provided for '#{selector}'" unless (opts[:with] or block)
-
       mappings << Rule.new(self, selector_for_current_within + selector, @helper_modules) do
         if opts[:with]
           if method(opts[:with]).arity == 0
