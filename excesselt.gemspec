@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{excesselt}
+  s.name = "excesselt"
   s.version = "1.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.3.6") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Daniel Heath}]
-  s.date = %q{2011-07-28}
-  s.description = %q{I had a lot of XML transformation to do and the requirements kept changing, so I sat down and wrote something that was easy to modify.}
-  s.email = [%q{daniel.r.heath@gmail.com}]
+  s.authors = ["Daniel Heath"]
+  s.date = "2011-10-20"
+  s.description = "I had a lot of XML transformation to do and the requirements kept changing, so I sat down and wrote something that was easy to modify."
+  s.email = ["daniel.r.heath@gmail.com"]
   s.extra_rdoc_files = [
     "README.md",
     "TODO"
@@ -53,20 +53,27 @@ Gem::Specification.new do |s|
     "spec/support/matchers/dom_matcher.rb",
     "tasks/rspec.rake"
   ]
-  s.homepage = %q{http://www.github.com/danielheath/excesselt}
-  s.rdoc_options = [%q{--charset=UTF-8}, %q{-mREADME.md}]
-  s.require_paths = [%q{lib}]
+  s.homepage = "http://www.github.com/danielheath/excesselt"
+  s.rdoc_options = ["--charset=UTF-8", "-mREADME.md"]
+  s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
-  s.rubygems_version = %q{1.8.5}
-  s.summary = %q{Helps you to transform XML without using XSLT.}
+  s.rubygems_version = "1.8.10"
+  s.summary = "Helps you to transform XML without using XSLT."
 
   if s.respond_to? :specification_version then
-    s.specification_version = 4
+    s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<excesselt>, [">= 0"])
       s.add_development_dependency(%q<activesupport>, [">= 0"])
       s.add_development_dependency(%q<json>, [">= 0"])
+      s.add_development_dependency(%q<rake>, [">= 0"])
+      s.add_development_dependency(%q<i18n>, [">= 0"])
+      s.add_development_dependency(%q<rspec>, ["> 2.0.0"])
+      s.add_development_dependency(%q<rcov>, [">= 0"])
+      s.add_development_dependency(%q<ruby-debug>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, [">= 0"])
+      s.add_development_dependency(%q<activesupport>, [">= 0"])
       s.add_development_dependency(%q<rake>, [">= 0"])
       s.add_development_dependency(%q<i18n>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["> 2.0.0"])
@@ -98,6 +105,14 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jeweler>, [">= 0"])
     else
       s.add_dependency(%q<excesselt>, [">= 0"])
+      s.add_dependency(%q<activesupport>, [">= 0"])
+      s.add_dependency(%q<json>, [">= 0"])
+      s.add_dependency(%q<rake>, [">= 0"])
+      s.add_dependency(%q<i18n>, [">= 0"])
+      s.add_dependency(%q<rspec>, ["> 2.0.0"])
+      s.add_dependency(%q<rcov>, [">= 0"])
+      s.add_dependency(%q<ruby-debug>, [">= 0"])
+      s.add_dependency(%q<jeweler>, [">= 0"])
       s.add_dependency(%q<activesupport>, [">= 0"])
       s.add_dependency(%q<rake>, [">= 0"])
       s.add_dependency(%q<i18n>, [">= 0"])
@@ -131,6 +146,14 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<excesselt>, [">= 0"])
+    s.add_dependency(%q<activesupport>, [">= 0"])
+    s.add_dependency(%q<json>, [">= 0"])
+    s.add_dependency(%q<rake>, [">= 0"])
+    s.add_dependency(%q<i18n>, [">= 0"])
+    s.add_dependency(%q<rspec>, ["> 2.0.0"])
+    s.add_dependency(%q<rcov>, [">= 0"])
+    s.add_dependency(%q<ruby-debug>, [">= 0"])
+    s.add_dependency(%q<jeweler>, [">= 0"])
     s.add_dependency(%q<activesupport>, [">= 0"])
     s.add_dependency(%q<rake>, [">= 0"])
     s.add_dependency(%q<i18n>, [">= 0"])
