@@ -9,7 +9,7 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 require 'jeweler'
-require 'rslt'
+require './lib/rslt'
 Jeweler::Tasks.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'rslt'
@@ -26,7 +26,7 @@ Jeweler::Tasks.new do |s|
 
 # Would be good to take a stylesheet and an xml file as arguments for a binary.
 #  s.bindir             = 'bin'
-#  s.executables        = ['rslt'] 
+#  s.executables        = ['rslt']
 #  s.default_executable = 'rslt'
 
   s.rdoc_options    = ["--charset=UTF-8", "-mREADME.md"]
