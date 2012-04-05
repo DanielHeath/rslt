@@ -42,8 +42,8 @@ Jeweler::Tasks.new do |s|
   s.add_development_dependency('jeweler')
 end
 
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
+require 'rdoc/task'
+RDoc::Task.new do |rdoc|
   version = RSLT::VERSION
   rdoc.main = "README.md"
   rdoc.rdoc_dir = 'rdoc'
