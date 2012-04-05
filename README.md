@@ -1,20 +1,20 @@
 # RSLT
 
-http://github.com/DanielHeath/rslt
-
-## DESCRIPTION:
-
-RSLT is a ruby library that I built because I hate XSLT.
+RSLT lets you describe a transformation between one XML format and another. 
+The idea is it's as functional as XSLT, but encourages stylesheets which are readable, modular and easy to test.
 
 I've extracted it from an app I built for my work at Lonely Planet.
 
-RSLT solves the same problem as XSLT does (that is, how can I transform this xml document into some other format).
+Use it instead of XSLT if you have any complex transformation rules.
+
+
+![Build Status](https://secure.travis-ci.org/DanielHeath/rslt.png "Build Status")
 
 ## FEATURES/PROBLEMS:
 
 Nice syntax.
 Testable, reusable xml transformation
-Tested on REE 1.8.7 and MRI 1.9.3
+In live use on REE 1.8.7 and MRI 1.9.3, and tested against several others via TravisCI.
 
 ## SYNOPSIS:
 
