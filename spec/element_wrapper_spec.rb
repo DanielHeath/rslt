@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Excesselt::ElementWrapper do
+describe RSLT::ElementWrapper do
   
   before do
     @stylesheet = Object.new
     @element = Object.new
     @builder = Object.new
-    @wrapper = Excesselt::ElementWrapper.new(@stylesheet, @element, @builder)
+    @wrapper = RSLT::ElementWrapper.new(@stylesheet, @element, @builder)
   end
   
   describe "passing through method calls" do

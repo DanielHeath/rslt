@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    excesselt (1.1.7)
+    rslt (1.1.7)
       builder (> 2)
-      excesselt
+      rslt
       nokogiri (~> 1)
 
 GEM
@@ -45,7 +45,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport
-  excesselt!
+  rslt!
   i18n
   jeweler
   json

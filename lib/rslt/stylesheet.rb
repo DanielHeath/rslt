@@ -1,7 +1,7 @@
 require 'active_support/core_ext/hash/except' rescue nil
 require 'builder'
 
-module Excesselt
+module RSLT
   class Stylesheet
 
     attr_reader :builder, :errors

@@ -4,7 +4,7 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "excesselt"
+  s.name = "rslt"
   s.version = "1.1.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.3.6") if s.respond_to? :required_rubygems_version=
@@ -24,21 +24,21 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "TODO",
-    "excesselt.gemspec",
-    "lib/excesselt.rb",
-    "lib/excesselt/element_wrapper.rb",
-    "lib/excesselt/rule.rb",
-    "lib/excesselt/stylesheet.rb",
-    "rdoc/classes/Excesselt.html",
-    "rdoc/classes/Excesselt/ElementWrapper.html",
-    "rdoc/classes/Excesselt/Rule.html",
-    "rdoc/classes/Excesselt/Stylesheet.html",
+    "rslt.gemspec",
+    "lib/rslt.rb",
+    "lib/rslt/element_wrapper.rb",
+    "lib/rslt/rule.rb",
+    "lib/rslt/stylesheet.rb",
+    "rdoc/classes/RSLT.html",
+    "rdoc/classes/RSLT/ElementWrapper.html",
+    "rdoc/classes/RSLT/Rule.html",
+    "rdoc/classes/RSLT/Stylesheet.html",
     "rdoc/created.rid",
     "rdoc/files/README_md.html",
-    "rdoc/files/lib/excesselt/element_wrapper_rb.html",
-    "rdoc/files/lib/excesselt/rule_rb.html",
-    "rdoc/files/lib/excesselt/stylesheet_rb.html",
-    "rdoc/files/lib/excesselt_rb.html",
+    "rdoc/files/lib/rslt/element_wrapper_rb.html",
+    "rdoc/files/lib/rslt/rule_rb.html",
+    "rdoc/files/lib/rslt/stylesheet_rb.html",
+    "rdoc/files/lib/rslt_rb.html",
     "rdoc/fr_class_index.html",
     "rdoc/fr_file_index.html",
     "rdoc/fr_method_index.html",
@@ -48,12 +48,12 @@ Gem::Specification.new do |s|
     "script/destroy",
     "script/generate",
     "spec/element_wrapper_spec.rb",
-    "spec/excesselt_spec.rb",
+    "spec/rslt_spec.rb",
     "spec/spec_helper.rb",
     "spec/support/matchers/dom_matcher.rb",
     "tasks/rspec.rake"
   ]
-  s.homepage = "http://www.github.com/danielheath/excesselt"
+  s.homepage = "http://www.github.com/danielheath/rslt"
   s.rdoc_options = ["--charset=UTF-8", "-mREADME.md"]
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
@@ -64,7 +64,7 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<excesselt>, [">= 0"])
+      s.add_runtime_dependency(%q<rslt>, [">= 0"])
       s.add_development_dependency(%q<activesupport>, [">= 0"])
       s.add_development_dependency(%q<json>, [">= 0"])
       s.add_development_dependency(%q<rake>, [">= 0"])
@@ -118,7 +118,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<ruby-debug>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
     else
-      s.add_dependency(%q<excesselt>, [">= 0"])
+      s.add_dependency(%q<rslt>, [">= 0"])
       s.add_dependency(%q<activesupport>, [">= 0"])
       s.add_dependency(%q<json>, [">= 0"])
       s.add_dependency(%q<rake>, [">= 0"])
@@ -173,7 +173,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<jeweler>, [">= 0"])
     end
   else
-    s.add_dependency(%q<excesselt>, [">= 0"])
+    s.add_dependency(%q<rslt>, [">= 0"])
     s.add_dependency(%q<activesupport>, [">= 0"])
     s.add_dependency(%q<json>, [">= 0"])
     s.add_dependency(%q<rake>, [">= 0"])

@@ -5,7 +5,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <title>Class: Excesselt::Rule</title>
+  <title>Class: RSLT::Rule</title>
   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
   <meta http-equiv="Content-Script-Type" content="text/javascript" />
   <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
@@ -50,13 +50,13 @@
         <table class="header-table">
         <tr class="top-aligned-row">
           <td><strong>Class</strong></td>
-          <td class="class-name-in-header">Excesselt::Rule</td>
+          <td class="class-name-in-header">RSLT::Rule</td>
         </tr>
         <tr class="top-aligned-row">
             <td><strong>In:</strong></td>
             <td>
-                <a href="../../files/lib/excesselt/rule_rb.html">
-                lib/excesselt/rule.rb
+                <a href="../../files/lib/rslt/rule_rb.html">
+                lib/rslt/rule.rb
                 </a>
         <br />
             </td>
@@ -154,7 +154,7 @@
             onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000006-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/excesselt/rule.rb, line 6</span>
+<span class="ruby-comment cmt"># File lib/rslt/rule.rb, line 6</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">stylesheet</span>, <span class="ruby-identifier">selector</span>, <span class="ruby-identifier">extensions</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
       <span class="ruby-ivar">@stylesheet</span> = <span class="ruby-identifier">stylesheet</span>
       <span class="ruby-ivar">@selector</span> = <span class="ruby-identifier">selector</span>
@@ -182,7 +182,7 @@
             onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000008-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/excesselt/rule.rb, line 18</span>
+<span class="ruby-comment cmt"># File lib/rslt/rule.rb, line 18</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">applies_to_element?</span>
       <span class="ruby-identifier">matching_elements</span>(<span class="ruby-identifier">element</span>.<span class="ruby-identifier">document</span>).<span class="ruby-identifier">include?</span> <span class="ruby-identifier">element</span>
     <span class="ruby-keyword kw">end</span>
@@ -205,7 +205,7 @@
             onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000010-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/excesselt/rule.rb, line 31</span>
+<span class="ruby-comment cmt"># File lib/rslt/rule.rb, line 31</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">generate</span>(<span class="ruby-identifier">builder</span>)
       <span class="ruby-comment cmt"># Call the block in the elements context</span>
       <span class="ruby-identifier">wrapper</span> = <span class="ruby-constant">ElementWrapper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">stylesheet</span>, <span class="ruby-identifier">element</span>, <span class="ruby-identifier">builder</span>)
@@ -237,7 +237,7 @@
             onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000009-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/excesselt/rule.rb, line 22</span>
+<span class="ruby-comment cmt"># File lib/rslt/rule.rb, line 22</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">matches?</span>(<span class="ruby-identifier">element</span>)
       <span class="ruby-ivar">@element</span> = <span class="ruby-identifier">element</span>
       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">applies_to_element?</span>
@@ -265,7 +265,7 @@
             onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
           <div class="method-source-code" id="M000007-source">
 <pre>
-<span class="ruby-comment cmt"># File lib/excesselt/rule.rb, line 13</span>
+<span class="ruby-comment cmt"># File lib/rslt/rule.rb, line 13</span>
     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">matching_elements</span>(<span class="ruby-identifier">document</span>)
       <span class="ruby-ivar">@selector_cache</span> <span class="ruby-operator">||=</span> {}
       <span class="ruby-ivar">@selector_cache</span>[<span class="ruby-identifier">document</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">document</span>.<span class="ruby-identifier">css</span>(<span class="ruby-ivar">@selector</span>)

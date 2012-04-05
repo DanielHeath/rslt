@@ -9,11 +9,11 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 require 'jeweler'
-require 'excesselt'
+require 'rslt'
 Jeweler::Tasks.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'excesselt'
-  s.version     = Excesselt::VERSION
+  s.name        = 'rslt'
+  s.version     = RSLT::VERSION
   s.summary     = 'Helps you to transform XML without using XSLT.'
   s.description = 'I had a lot of XML transformation to do and the requirements kept changing, so I sat down and wrote something that was easy to modify.'
 
@@ -22,12 +22,12 @@ Jeweler::Tasks.new do |s|
 
   s.author            = 'Daniel Heath'
   s.email             = ['daniel.r.heath@gmail.com']
-  s.homepage          = 'http://www.github.com/danielheath/excesselt'
+  s.homepage          = 'http://www.github.com/danielheath/rslt'
 
 # Would be good to take a stylesheet and an xml file as arguments for a binary.
 #  s.bindir             = 'bin'
-#  s.executables        = ['excesselt'] 
-#  s.default_executable = 'excesselt'
+#  s.executables        = ['rslt'] 
+#  s.default_executable = 'rslt'
 
   s.rdoc_options    = ["--charset=UTF-8", "-mREADME.md"]
 
@@ -44,7 +44,7 @@ end
 
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
-  version = Excesselt::VERSION
+  version = RSLT::VERSION
   rdoc.main = "README.md"
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "<%= project_name %> #{version}"

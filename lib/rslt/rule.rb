@@ -1,4 +1,4 @@
-module Excesselt
+module RSLT
   class Rule
     
     attr_reader :stylesheet, :element, :block, :selector

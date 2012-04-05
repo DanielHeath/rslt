@@ -1,4 +1,4 @@
-module Excesselt
+module RSLT
   class ElementWrapper
   
     attr_reader :element, :builder, :stylesheet

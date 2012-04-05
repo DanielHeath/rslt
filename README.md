@@ -1,37 +1,37 @@
-# Excesselt
+# RSLT
 
-http://github.com/DanielHeath/excesselt
+http://github.com/DanielHeath/rslt
 
 ## DESCRIPTION:
 
-Excesselt is a ruby library that I built because I hate XSLT.
+RSLT is a ruby library that I built because I hate XSLT.
 
 I've extracted it from an app I built for my work at Lonely Planet.
 
-Excesselt solves the same problem as XSLT does (that is, how can I transform this xml document into some other format).
+RSLT solves the same problem as XSLT does (that is, how can I transform this xml document into some other format).
 
 ## FEATURES/PROBLEMS:
 
 Nice syntax.
 Testable, reusable xml transformation
-Tested on REE 1.8.7 - TODO test on more platforms and update this section
+Tested on REE 1.8.7 and MRI 1.9.3
 
 ## SYNOPSIS:
-    
-    class MyStylesheet < Excesselt::Stylesheet
+
+    class MyStylesheet < RSLT::Stylesheet
       def rules
         render('parent > child')     { builder.p(:style => "child_content" ) { child_content }  }
         render('parent')             { builder.p(:style => "parent_content") { child_content }  }
         render('text()')             { add element.to_xml.upcase                                }
       end
     end
-    
+
     MyStylesheet.transform <<-XML
     <parent>
-      <child>Use Excesselt</child>
+      <child>Use RSLT</child>
     </parent>
     XML
-    -> <p style="parent_content"><p style="child_content">USE EXCESSELT</p></p>
+    -> <p style="parent_content"><p style="child_content">USE RSLT</p></p>
 
 ## REQUIREMENTS:
 
@@ -39,7 +39,7 @@ Tested on REE 1.8.7 - TODO test on more platforms and update this section
 
 ## INSTALL:
 
-* gem install excesselt
+* gem install rslt
 
 ## LICENSE:
 

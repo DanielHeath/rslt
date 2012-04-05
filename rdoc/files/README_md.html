@@ -70,24 +70,24 @@
 
     <div id="description">
       <p>
-# <a href="../classes/Excesselt.html">Excesselt</a>
+# <a href="../classes/RSLT.html">RSLT</a>
 </p>
 <p>
 <a
-href="http://github.com/DanielHeath/excesselt">github.com/DanielHeath/excesselt</a>
+href="http://github.com/DanielHeath/rslt">github.com/DanielHeath/rslt</a>
 </p>
 <p>
 ## DESCRIPTION:
 </p>
 <p>
-<a href="../classes/Excesselt.html">Excesselt</a> is a ruby library that I
+<a href="../classes/RSLT.html">RSLT</a> is a ruby library that I
 built because I hate XSLT.
 </p>
 <p>
 I&#8216;ve extracted it from an app I built for my work at Lonely Planet.
 </p>
 <p>
-<a href="../classes/Excesselt.html">Excesselt</a> solves the same problem
+<a href="../classes/RSLT.html">RSLT</a> solves the same problem
 as XSLT does (that is, how can I transform this xml document into some
 other format).
 </p>
@@ -102,7 +102,7 @@ TODO test on more platforms and update this section
 ## SYNOPSIS:
 </p>
 <pre>
-    class MyStylesheet &lt; Excesselt::Stylesheet
+    class MyStylesheet &lt; RSLT::Stylesheet
       def rules
         render('parent &gt; child')     { builder.p(:style =&gt; &quot;child_content&quot; ) { child_content }  }
         render('parent')             { builder.p(:style =&gt; &quot;parent_content&quot;) { child_content }  }
@@ -112,10 +112,10 @@ TODO test on more platforms and update this section
 
     MyStylesheet.transform &lt;&lt;-XML
     &lt;parent&gt;
-      &lt;child&gt;Use Excesselt&lt;/child&gt;
+      &lt;child&gt;Use RSLT&lt;/child&gt;
     &lt;/parent&gt;
     XML
-    -&gt; &lt;p style=&quot;parent_content&quot;&gt;&lt;p style=&quot;child_content&quot;&gt;USE EXCESSELT&lt;/p&gt;&lt;/p&gt;
+    -&gt; &lt;p style=&quot;parent_content&quot;&gt;&lt;p style=&quot;child_content&quot;&gt;USE RSLT&lt;/p&gt;&lt;/p&gt;
 </pre>
 <p>
 ## REQUIREMENTS:
@@ -129,7 +129,7 @@ TODO test on more platforms and update this section
 ## INSTALL:
 </p>
 <ul>
-<li>gem install excesselt
+<li>gem install rslt
 
 </li>
 </ul>

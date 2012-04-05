@@ -1,9 +1,9 @@
 $:.unshift(File.dirname(__FILE__)) unless $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
-module Excesselt
+module RSLT
   VERSION = '1.1.7'
 end
 
-require 'excesselt/stylesheet'
-require 'excesselt/rule'
-require 'excesselt/element_wrapper'
+require 'rslt/stylesheet'
+require 'rslt/rule'
+require 'rslt/element_wrapper'

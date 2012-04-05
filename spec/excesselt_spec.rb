@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 require 'json'
-describe "excesselt" do
+describe "rslt" do
 
   describe "When a developer wants to transform their hello world xml" do
 
@@ -18,7 +18,7 @@ describe "excesselt" do
         end
       end
 
-      @stylesheet = Class.new(Excesselt::Stylesheet) do
+      @stylesheet = Class.new(RSLT::Stylesheet) do
         def rules
           render('parent > child')     { builder.p(:style => "child_content" ) { child_content }  }
           render('parent')             { builder.p(:style => "parent_content") { child_content }  }
