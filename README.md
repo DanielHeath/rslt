@@ -10,13 +10,13 @@ Use it instead of XSLT if you have any complex transformation rules.
 
 ![Build Status](https://secure.travis-ci.org/DanielHeath/rslt.png "Build Status")
 
-## FEATURES/PROBLEMS:
+## FEATURES
 
 Nice syntax.
 Testable, reusable xml transformation
 In live use on REE 1.8.7 and MRI 1.9.3, and tested against several others via TravisCI.
 
-## SYNOPSIS:
+## Example
 
     class MyStylesheet < RSLT::Stylesheet
       def rules
