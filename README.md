@@ -7,7 +7,7 @@ I've extracted it from an app I built for my work at Lonely Planet.
 
 Use it instead of XSLT if you have any complex transformation rules.
 
-My colleague at Lonely Planet, Jani Patokallio, has written up an excellent description [over here](http://headsexploding.lonelyplanet.com/2013/03/05/XML_Transformation_With_RSLT)
+My colleague at Lonely Planet, Jani Patokallio, has written up an excellent description [over here](http://hackpackers.lonelyplanet.com/2013/03/05/XML-Transformation-With-RSLT.html)
 
 ![Build Status](https://secure.travis-ci.org/DanielHeath/rslt.png "Build Status")
 
