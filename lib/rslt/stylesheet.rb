@@ -21,6 +21,7 @@ module RSLT
     def transform(xml)
       xml = xml.root if xml.is_a? Nokogiri::XML::Document
       xml = Nokogiri::XML(xml, nil, nil, Nokogiri::XML::ParseOptions.new).root unless xml.is_a? Nokogiri::XML::Node
+      @document = xml.document
       generate_element(xml)
     end
 
@@ -37,7 +38,7 @@ module RSLT
       # Look up the rule that is used to render this.
       # Should fold into stylesheet.rules (collection) .find(:matches?, element)
       # TODO: Patch enumerable#find etc to take a plain symbol and some arguments?
-      rule = get_rules.find {|rule| rule.matches? element }
+      rule = get_rules.find {|rule| rule.matches? element, @document }
 
       rule or raise [
         "There is no style defined to handle this element.",
