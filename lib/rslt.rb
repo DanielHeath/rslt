@@ -4,6 +4,8 @@ module RSLT
   VERSION = '1.1.9'
 end
 
+require 'nokogiri'
+require 'builder'
 require 'rslt/stylesheet'
 require 'rslt/rule'
 require 'rslt/element_wrapper'

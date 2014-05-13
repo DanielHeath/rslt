@@ -1,6 +1,6 @@
 # RSLT
 
-RSLT lets you describe a transformation between one XML format and another. 
+RSLT lets you describe a transformation between one XML format and another.
 The idea is it's as functional as XSLT, but encourages stylesheets which are readable, modular and easy to test.
 
 I've extracted it from an app I built for my work at Lonely Planet.
@@ -15,7 +15,7 @@ My colleague at Lonely Planet, Jani Patokallio, has written up an excellent desc
 
 Nice syntax.
 Testable, reusable xml transformation
-In live use on REE 1.8.7 and MRI 1.9.3, and tested against several others via TravisCI.
+Supported on MRI 1.9.3 and above, and tested against several others via TravisCI.
 
 ## Example
 
