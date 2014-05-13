@@ -11,9 +11,9 @@ module RSLT
 
     def child_content(selector=nil)
       elements = selector ? @element.css(selector) : @element.children
-      elements.each do |child|
+      elements.map do |child|
         stylesheet.generate_element(child)
-      end
+      end.join
     end
 
     def method_missing(sym, *args)

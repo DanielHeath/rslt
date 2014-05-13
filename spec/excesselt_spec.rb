@@ -22,6 +22,7 @@ describe "rslt" do
         def rules
           render('parent > child')     { builder.p(:style => "child_content" ) { child_content }  }
           render('parent')             { builder.p(:style => "parent_content") { child_content }  }
+          render('grandparent')        { child_content }
           helper TestHelper do
             render('parent.explode > text()', :with => :a_method_that_doesnt_exist)
             within 'parent' do
@@ -36,9 +37,9 @@ describe "rslt" do
 
     it "should transform a hello world document according to a stylesheet" do
       xml = <<-XML
-        <parent>
+        <grandparent><parent>
           <child>Hello World</child>
-        </parent>
+        </parent></grandparent>
       XML
       expected = <<-EXPECTED
         <p style="parent_content">
