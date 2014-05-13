@@ -3,7 +3,7 @@ PATH
   specs:
     rslt (1.1.9)
       builder
-      nokogiri (< 1.6)
+      nokogiri
 
 GEM
   remote: http://rubygems.org/

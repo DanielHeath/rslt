@@ -39,7 +39,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = "1.8.10"
   s.summary = "Helps you to transform XML without using XSLT."
 
-  s.add_runtime_dependency(%q<nokogiri>, ["< 1.6"])
+  s.add_runtime_dependency(%q<nokogiri>)
   s.add_runtime_dependency(%q<builder>, [">= 0"])
   s.add_development_dependency(%q<activesupport>, [">= 0"])
   s.add_development_dependency(%q<rake>, [">= 0"])
