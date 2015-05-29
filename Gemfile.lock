@@ -41,3 +41,6 @@ DEPENDENCIES
   rcov
   rspec (> 2.0.0)
   ruby-debug
+
+BUNDLED WITH
+   1.10.0
