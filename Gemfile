@@ -4,7 +4,7 @@ gem 'nokogiri'
 gem 'builder'
 
 group :development do
-  gem 'activesupport'
+  gem 'activesupport', '3.2.20'
   gem 'rake'
   gem 'i18n'
   gem 'rspec', '>2.0.0'
