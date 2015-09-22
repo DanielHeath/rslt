@@ -54,6 +54,17 @@ module RSLT
       @helper_modules -= [mods].flatten
     end
 
+    def safe_helper(*mods)
+      original_modules = @helper_modules.dup
+      existing_modules = @helper_modules & mods # intersection
+      raise "Modules already loaded: #{existing_modules.join(', ')}" unless existing_modules.empty?
+      @helper_modules = @helper_modules.concat mods # we can concat cause there are no dupes
+
+      yield
+
+      @helper_modules = original_modules
+    end
+
     def within(selector)
       @within.push(selector)
       yield
@@ -90,6 +101,5 @@ module RSLT
       end
       mappings
     end
-
   end
 end
