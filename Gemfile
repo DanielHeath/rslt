@@ -10,4 +10,5 @@ group :development do
   gem 'rspec', '>2.0.0'
   gem 'rcov', :platform => 'ruby_18'
   gem 'ruby-debug', :platform => 'ruby_18'
+  gem 'byebug', :platform => 'ruby_21'
 end
