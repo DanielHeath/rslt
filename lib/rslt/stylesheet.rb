@@ -13,8 +13,10 @@ module RSLT
     def initialize(options={})
       @builder = options[:builder] || Builder::XmlMarkup.new
       @helper_modules = options[:helper_modules] || []
+      @helper_module_sets = [ @helper_modules.dup ]
       @errors = options[:errors] || []
       @within = []
+      @safe = false
     end
 
     # Pass in a string or a Nokogiri Node or Document.
@@ -49,16 +51,18 @@ module RSLT
     end
 
     def helper(*mods, &block)
+      @safe = false
       @helper_modules.push(mods).flatten!
       block.call
       @helper_modules -= [mods].flatten
     end
 
     def safe_helper(*mods)
-      original_modules = @helper_modules.dup
-      @helper_modules = @helper_modules.concat mods # we can concat cause there are no dupes
+      @safe = true
+      original_modules = @helper_module_sets.last.dup
+      @helper_module_sets.push(original_modules.concat mods)
       yield
-      @helper_modules = original_modules
+      @helper_module_sets.pop
     end
 
     def within(selector)
@@ -71,9 +75,17 @@ module RSLT
       @within.map {|e| e + ' '}.join('')
     end
 
+    def render_helpers
+      if @safe
+        @helper_module_sets.last
+      else
+        @helper_modules
+      end
+    end
+
     def render(selector, opts={}, &block)
       raise "Neither a block nor a :with option were provided for '#{selector}'" unless (opts[:with] or block)
-      mappings << Rule.new(self, selector_for_current_within + selector, @helper_modules) do
+      mappings << Rule.new(self, selector_for_current_within + selector, render_helpers) do
         if opts[:with]
           if method(opts[:with]).arity == 0
             self.send(opts[:with])
