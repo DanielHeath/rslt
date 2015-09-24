@@ -109,4 +109,89 @@ describe "rslt" do
 
   end
 
+  # This section showcases the use of RSLT::Stylesheet#safe_helper.
+  # If you're interested in the origins of `safe_helper`, check out:
+  # - https://trello.com/c/HVJmdbLz (LP access only)
+  # - https://github.com/lonelyplanet/rslt/pull/2
+  describe 'safe processing' do
+    before do
+      module T800
+        def emit(label='(unlabeled)')
+          add "#{label}: come with me if you want to live"
+          child_content
+        end
+      end
+
+      module T1000
+        def emit(label='(unlabeled)')
+          add "#{label}: say... that's a nice bike..."
+          child_content
+        end
+      end
+
+      class HelperClass < RSLT::Stylesheet
+        def rules
+          within 'bundle' do
+            # if `safe_helper` was `helper`, we could `T800#emit` here
+            render('>text():first', w1th: :emit)  { }
+
+            safe_helper T800 do
+              # if `safe_helper` was `helper`, we would `T1000#emit` here
+              render('>parent')                   { emit('before nested T800') }
+
+              safe_helper T800, T1000  do
+                within '>parent' do
+                  render('>parent')               { emit('nested T1000') }
+                end
+              end
+              # if if `safe_helper` was `helper`, `emit` would be missing'
+              # render('child')                     { emit('after nested T800') }
+            end
+          end
+
+          render('bundle, parent, child, text()') { child_content }
+        end
+      end
+    end
+
+    let(:stylesheet) { HelperClass.new(builder: []) }
+
+    let(:xml) do
+      <<-XML
+      <bundle>
+        <parent>
+            <parent>
+              <child/>
+            </parent>
+          </parent>
+        </bundle>
+      XML
+    end
+
+    let(:results) { stylesheet.transform(xml.strip); stylesheet.builder }
+
+    it 'T800 always says "come with me if you want to live"' do
+       t800_hits = results.select {|r| r.include? 'come with me if you want to live' }
+
+       expect(t800_hits.length).to eq t800_hits.select {|h| h.include? 'T800' }.length
+    end
+
+    it 'T1000 always says "say... that\'s a nice bike"' do
+       t1000_hits = results.select {|r| r.include? "say... that's a nice bike" }
+
+       expect(t1000_hits).to eq t1000_hits.select {|h| h.include? 'T1000' }
+    end
+
+    describe "error handling" do
+      it "should record errors encountered during processing" do
+        xml = <<-XML
+          <parent><unexpected></unexpected></parent>
+        XML
+
+        expect { stylesheet.transform(xml) }.to raise_exception do |e|
+          expect(e.message).to match /With selector '.*' and included modules: \[\]/
+        end
+      end
+    end
+  end
 end
