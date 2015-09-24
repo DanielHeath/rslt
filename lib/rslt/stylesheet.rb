@@ -59,8 +59,7 @@ module RSLT
 
     def safe_helper(*mods)
       @safe = true
-      original_modules = @helper_module_sets.last.dup
-      @helper_module_sets.push(original_modules.concat mods)
+      @helper_module_sets.push mods
       yield
       @helper_module_sets.pop
     end
@@ -77,7 +76,7 @@ module RSLT
 
     def render_helpers
       if @safe
-        @helper_module_sets.last
+        @helper_module_sets.flatten
       else
         @helper_modules
       end
