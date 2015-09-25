@@ -109,4 +109,83 @@ describe "rslt" do
 
   end
 
+  # This section showcases the use of RSLT::Stylesheet#safe_helper.
+  # If you're interested in the origins of `safe_helper`, check out:
+  # - https://trello.com/c/HVJmdbLz (LP access only)
+  # - https://github.com/lonelyplanet/rslt/pull/2
+  describe 'safe processing' do
+    before do
+      module T800
+        def emit(label='(unlabeled)')
+          add "#{label}: come with me if you want to live"
+        end
+      end
+
+      module T1000
+        def emit(label='(unlabeled)')
+          add "#{label}: say... that's a nice bike..."
+        end
+      end
+
+      class HelperClass < RSLT::Stylesheet
+        def rules
+          within 'bundle' do
+            # if `safe_helper` was `helper`, we could `T800#emit` here
+            render('>text():first', w1th: :emit)  { child_content }
+
+            safe_helper T800 do
+              # if `safe_helper` was `helper`, we would `T1000#emit` here
+              render('>parent')                   { emit('nested T800'); child_content }
+
+              safe_helper T800, T1000  do
+                within '>parent' do
+                  render('>parent')               { emit('nested T1000'); child_content }
+                end
+              end
+              # if if `safe_helper` was `helper`, `emit` would be missing'
+              # render('child')                     { emit('after nested T800') }
+            end
+          end
+
+          render('bundle, parent, child, text()') { child_content }
+        end
+      end
+    end
+
+    let(:stylesheet) { HelperClass.new(builder: []) }
+
+    let(:xml) do
+      <<-XML
+      <bundle>
+        <parent>
+            <parent>
+              <child/>
+            </parent>
+          </parent>
+        </bundle>
+      XML
+    end
+
+    let(:results) { stylesheet.transform(xml.strip); stylesheet.builder }
+
+    {
+      'T800'  => "come with me if you want to live",
+      'T1000' => "say... that's a nice bike"
+    }.each_pair do |who, what|
+      it "#{who} always says \"#{what}\"" do
+         hits = results.select {|r| r.include? what }
+         expect(hits).to eq hits.select {|h| h.include? who }
+      end
+    end
+
+    describe "error handling" do
+      let(:xml) { '<parent><unexpected></unexpected></parent>' }
+
+      it "should record errors encountered during processing" do
+        expect { results }.to raise_error do |error|
+          expect(error.message).to match /With selector '.*' and included modules: \[\]/
+        end
+      end
+    end
+  end
 end
