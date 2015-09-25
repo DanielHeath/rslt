@@ -118,14 +118,12 @@ describe "rslt" do
       module T800
         def emit(label='(unlabeled)')
           add "#{label}: come with me if you want to live"
-          child_content
         end
       end
 
       module T1000
         def emit(label='(unlabeled)')
           add "#{label}: say... that's a nice bike..."
-          child_content
         end
       end
 
@@ -133,15 +131,15 @@ describe "rslt" do
         def rules
           within 'bundle' do
             # if `safe_helper` was `helper`, we could `T800#emit` here
-            render('>text():first', w1th: :emit)  { }
+            render('>text():first', w1th: :emit)  { child_content }
 
             safe_helper T800 do
               # if `safe_helper` was `helper`, we would `T1000#emit` here
-              render('>parent')                   { emit('before nested T800') }
+              render('>parent')                   { emit('nested T800'); child_content }
 
               safe_helper T800, T1000  do
                 within '>parent' do
-                  render('>parent')               { emit('nested T1000') }
+                  render('>parent')               { emit('nested T1000'); child_content }
                 end
               end
               # if if `safe_helper` was `helper`, `emit` would be missing'
@@ -170,26 +168,22 @@ describe "rslt" do
 
     let(:results) { stylesheet.transform(xml.strip); stylesheet.builder }
 
-    it 'T800 always says "come with me if you want to live"' do
-       t800_hits = results.select {|r| r.include? 'come with me if you want to live' }
-
-       expect(t800_hits.length).to eq t800_hits.select {|h| h.include? 'T800' }.length
-    end
-
-    it 'T1000 always says "say... that\'s a nice bike"' do
-       t1000_hits = results.select {|r| r.include? "say... that's a nice bike" }
-
-       expect(t1000_hits).to eq t1000_hits.select {|h| h.include? 'T1000' }
+    {
+      'T800'  => "come with me if you want to live",
+      'T1000' => "say... that's a nice bike"
+    }.each_pair do |who, what|
+      it "#{who} always says \"#{what}\"" do
+         hits = results.select {|r| r.include? what }
+         expect(hits).to eq hits.select {|h| h.include? who }
+      end
     end
 
     describe "error handling" do
-      it "should record errors encountered during processing" do
-        xml = <<-XML
-          <parent><unexpected></unexpected></parent>
-        XML
+      let(:xml) { '<parent><unexpected></unexpected></parent>' }
 
-        expect { stylesheet.transform(xml) }.to raise_exception do |e|
-          expect(e.message).to match /With selector '.*' and included modules: \[\]/
+      it "should record errors encountered during processing" do
+        expect { results }.to raise_error do |error|
+          expect(error.message).to match /With selector '.*' and included modules: \[\]/
         end
       end
     end
