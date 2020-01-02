@@ -12,9 +12,9 @@ describe RSLT::ElementWrapper do
   describe "passing through method calls" do
     describe "when an error is raised in a passed through call" do
       it "should raise an error" do
-        lambda {
+        expect {
           @wrapper.foo
-        }.should raise_exception
+        }.to raise_error(NoMethodError)
       end
     end
   end

@@ -45,7 +45,7 @@ describe "rslt" do
           <p style="child_content">HELLO WORLD</p>
         </p>
       EXPECTED
-      @stylesheet.transform(xml).should match_the_dom_of(expected)
+      expect(@stylesheet.transform(xml)).to match_the_dom_of(expected)
     end
 
     it "should ignore comments" do
@@ -57,7 +57,7 @@ describe "rslt" do
       expected = <<-EXPECTED
         <p style="parent_content"/>
       EXPECTED
-      @stylesheet.transform(xml).should match_the_dom_of(expected)
+      expect(@stylesheet.transform(xml)).to match_the_dom_of(expected)
     end
 
     it "should transform a goodbye document according to a stylesheet" do
@@ -77,7 +77,7 @@ describe "rslt" do
           </p>
         </p>
       EXPECTED
-      @stylesheet.transform(xml).should match_the_dom_of(expected)
+      expect(@stylesheet.transform(xml)).to match_the_dom_of(expected)
     end
 
     describe "error handling" do
@@ -88,7 +88,7 @@ describe "rslt" do
         XML
         @instance = @stylesheet.new
         @instance.transform(xml)
-        @instance.errors.should == ['Text is not allowed within a parent node! Options were {"passing":"a custom option"}']
+        expect(@instance.errors).to eql ['Text is not allowed within a parent node! Options were {"passing":"a custom option"}']
       end
 
       it "should record errors encountered during processing" do
@@ -96,12 +96,13 @@ describe "rslt" do
           <parent><unexpected></unexpected></parent>
         XML
         @instance = @stylesheet.new
-        lambda { @instance.transform(xml) }.should raise_exception {|e|
-          e.message.should =~ /With selector '.*' and included modules: \[TestHelper\]/
-          e.message.should =~ /There is no style defined to handle this element/
-          e.message.should =~ /CSS Path: 'parent > unexpected'/
-          e.message.should =~ /Xpath: '\/parent\/unexpected'/
-          e.message.should =~ /Context: 'document, parent'/
+        expect { @instance.transform(xml) }.to raise_exception { |e|
+          message = e.message
+          expect(message).to match /With selector '.*' and included modules: \[TestHelper\]/
+          expect(message).to match /There is no style defined to handle this element/
+          expect(message).to match /CSS Path: 'parent > unexpected'/
+          expect(message).to match /Xpath: '\/parent\/unexpected'/
+          expect(message).to match /Context: 'document, parent'/
         }
       end
 

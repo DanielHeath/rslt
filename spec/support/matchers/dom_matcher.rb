@@ -7,11 +7,11 @@ RSpec::Matchers.define :match_the_dom_of do |expected_xml_string|
     string ? string.to_s.gsub('"', "'").strip.inspect : 'NIL'
   end
   
-  failure_message_for_should_not do |actual|
+  failure_message_when_negated do |actual|
     "expected that #{describe(actual)} would not match the dom of #{describe(expected)}"
   end
 
-  failure_message_for_should do |actual|
+  failure_message do |actual|
     <<-MESSAGE
 
 expected first, but got second: 
@@ -22,7 +22,7 @@ expected first, but got second:
   MESSAGE
   end
 
-  failure_message_for_should_not do |actual|
+  failure_message_when_negated do |actual|
     <<-MESSAGE
 
 expected actual not to equal expected:
