@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require 'rspec'
 
-$:.unshift(File.dirname(__FILE__) + '/../lib')
+$LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
 require 'rslt'
 require 'support/matchers/dom_matcher'

@@ -1,6 +1,7 @@
+# frozen_string_literal: true
+
 module RSLT
   class ElementWrapper
-
     attr_reader :element, :builder, :stylesheet
 
     def initialize(stylesheet, element, builder)
@@ -9,7 +10,7 @@ module RSLT
       @builder = builder
     end
 
-    def child_content(selector=nil)
+    def child_content(selector = nil)
       elements = selector ? @element.css(selector) : @element.children
       elements.each do |child|
         stylesheet.generate_element(child)
@@ -17,11 +18,10 @@ module RSLT
     end
 
     def method_missing(sym, *args)
-      begin
-        @element.send(sym, *args)
-      rescue Exception => e
-        raise e.exception("Error delegating method '#{sym}' to #{@element.class.name}: #{e.message}\n\n#{e.backtrace.join("\n")}")
-      end
+      @element.send(sym, *args)
+    rescue Exception => e
+      message = "#{e.message}\n\n#{e.backtrace.join("\n")}"
+      raise e.exception("Error delegating method '#{sym}' to #{@element.class.name}: #{message}")
     end
 
     def add(*content)
@@ -31,7 +31,5 @@ module RSLT
     def error(string)
       stylesheet.errors << string
     end
-
   end
-
 end

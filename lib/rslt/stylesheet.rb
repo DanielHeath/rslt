@@ -1,19 +1,24 @@
-require 'active_support/core_ext/hash/except' rescue nil
+# frozen_string_literal: true
+
+begin
+  require 'active_support/core_ext/hash/except'
+rescue StandardError
+  nil
+end
 require 'builder'
 
 module RSLT
   class Stylesheet
-
     attr_reader :builder, :errors
 
     def self.transform(xml)
-      self.new.transform(xml)
+      new.transform(xml)
     end
 
-    def initialize(options={})
+    def initialize(options = {})
       @builder = options[:builder] || Builder::XmlMarkup.new
       @helper_modules = options[:helper_modules] || []
-      @helper_module_sets = [ @helper_modules.dup ]
+      @helper_module_sets = [@helper_modules.dup]
       @errors = options[:errors] || []
       @within = []
       @safe = false
@@ -29,8 +34,10 @@ module RSLT
 
     def generate_element(element)
       return '' if element.instance_of? Nokogiri::XML::Comment
+
       rule = rule_for(element)
-      raise "Attempted to generate #{self.name} with parents #{self.parents.inspect} but no rule was found." unless rule
+      raise "Attempted to generate #{name} with parents #{parents.inspect} but no rule was found." unless rule
+
       rule.generate(builder)
     end
 
@@ -40,14 +47,14 @@ module RSLT
       # Look up the rule that is used to render this.
       # Should fold into stylesheet.rules (collection) .find(:matches?, element)
       # TODO: Patch enumerable#find etc to take a plain symbol and some arguments?
-      rule = get_rules.find {|rule| rule.matches? element, @document }
+      current_rule = all_rules.find { |rule| rule.matches? element, @document }
 
-      rule or raise [
-        "There is no style defined to handle this element.",
+      current_rule || raise([
+        'There is no style defined to handle this element.',
         "CSS Path: '#{element.css_path}'",
         "Xpath: '#{element.path}'",
-        "Context: '#{element.ancestors.map(&:name).reverse.join(", ")}'"
-      ].join("\n")
+        "Context: '#{element.ancestors.map(&:name).reverse.join(', ')}'"
+      ].join("\n"))
     end
 
     def helper(*mods, &block)
@@ -71,7 +78,7 @@ module RSLT
     end
 
     def selector_for_current_within
-      @within.map {|e| e + ' '}.join('')
+      @within.map { |e| e + ' ' }.join('')
     end
 
     def render_helpers
@@ -82,17 +89,18 @@ module RSLT
       end
     end
 
-    def render(selector, opts={}, &block)
-      raise "Neither a block nor a :with option were provided for '#{selector}'" unless (opts[:with] or block)
+    def render(selector, opts = {}, &block)
+      raise "Neither a block nor a :with option were provided for '#{selector}'" unless opts[:with] || block
+
       mappings << Rule.new(self, selector_for_current_within + selector, render_helpers) do
         if opts[:with]
-          if method(opts[:with]).arity == 0
-            self.send(opts[:with])
+          if method(opts[:with]).arity.zero?
+            send(opts[:with])
           else
-            self.send(opts[:with], opts.except(:with))
+            send(opts[:with], opts.except(:with))
           end
         else
-          instance_eval &block
+          instance_eval(&block)
         end
       end
     end
@@ -101,7 +109,7 @@ module RSLT
       @mappings ||= []
     end
 
-    def get_rules
+    def all_rules
       unless @rules_generated
         rules # Generates the mappings
         @rules_generated = true

@@ -1,40 +1,40 @@
+# frozen_string_literal: true
+
 require File.dirname(__FILE__) + '/spec_helper.rb'
 require 'json'
-describe "rslt" do
-
-  describe "When a developer wants to transform their hello world xml" do
-
+describe 'rslt' do
+  describe 'When a developer wants to transform their hello world xml' do
     before do
-
       module TestHelper
-        def error_text_in_parent(options=nil)
-          error("Text is not allowed within a parent node! Options were #{options.to_json}") unless (text.strip == '')
+        def error_text_in_parent(options = nil)
+          error("Text is not allowed within a parent node! Options were #{options.to_json}") unless text.strip == ''
         end
+
         def uppercase_text
           add text.upcase
         end
+
         def text
-          self.to_xml
+          to_xml
         end
       end
 
       @stylesheet = Class.new(RSLT::Stylesheet) do
         def rules
-          render('parent > child')     { builder.p(:style => "child_content" ) { child_content }  }
-          render('parent')             { builder.p(:style => "parent_content") { child_content }  }
+          render('parent > child')     { builder.p(style: 'child_content') { child_content } }
+          render('parent')             { builder.p(style: 'parent_content') { child_content } }
           helper TestHelper do
-            render('parent.explode > text()', :with => :a_method_that_doesnt_exist)
+            render('parent.explode > text()', with: :a_method_that_doesnt_exist)
             within 'parent' do
-              render('> text()', :with => :error_text_in_parent, :passing => 'a custom option')
+              render('> text()', with: :error_text_in_parent, passing: 'a custom option')
             end
-            render('text()', :with => :uppercase_text)
+            render('text()', with: :uppercase_text)
           end
         end
       end
-
     end
 
-    it "should transform a hello world document according to a stylesheet" do
+    it 'should transform a hello world document according to a stylesheet' do
       xml = <<-XML
         <parent>
           <child>Hello World</child>
@@ -48,7 +48,7 @@ describe "rslt" do
       expect(@stylesheet.transform(xml)).to match_the_dom_of(expected)
     end
 
-    it "should ignore comments" do
+    it 'should ignore comments' do
       xml = <<-XML
         <parent>
           <!-- Ignore me -->
@@ -60,7 +60,7 @@ describe "rslt" do
       expect(@stylesheet.transform(xml)).to match_the_dom_of(expected)
     end
 
-    it "should transform a goodbye document according to a stylesheet" do
+    it 'should transform a goodbye document according to a stylesheet' do
       xml = <<-XML
         <parent>
           <parent>
@@ -80,34 +80,33 @@ describe "rslt" do
       expect(@stylesheet.transform(xml)).to match_the_dom_of(expected)
     end
 
-    describe "error handling" do
-
-      it "should record errors encountered during processing" do
+    describe 'error handling' do
+      it 'should record errors encountered during processing' do
         xml = <<-XML
           <parent>foo</parent>
         XML
         @instance = @stylesheet.new
         @instance.transform(xml)
-        expect(@instance.errors).to eql ['Text is not allowed within a parent node! Options were {"passing":"a custom option"}']
+        expect(@instance.errors).to eql(
+          ['Text is not allowed within a parent node! Options were {"passing":"a custom option"}']
+        )
       end
 
-      it "should record errors encountered during processing" do
+      it 'should record errors encountered during processing' do
         xml = <<-XML
           <parent><unexpected></unexpected></parent>
         XML
         @instance = @stylesheet.new
-        expect { @instance.transform(xml) }.to raise_exception { |e|
+        expect { @instance.transform(xml) }.to(raise_exception do |e|
           message = e.message
-          expect(message).to match /With selector '.*' and included modules: \[TestHelper\]/
-          expect(message).to match /There is no style defined to handle this element/
-          expect(message).to match /CSS Path: 'parent > unexpected'/
-          expect(message).to match /Xpath: '\/parent\/unexpected'/
-          expect(message).to match /Context: 'document, parent'/
-        }
+          expect(message).to match(/With selector '.*' and included modules: \[TestHelper\]/)
+          expect(message).to match(/There is no style defined to handle this element/)
+          expect(message).to match(/CSS Path: 'parent > unexpected'/)
+          expect(message).to match(%r{Xpath: '/parent/unexpected'})
+          expect(message).to match(/Context: 'document, parent'/)
+        end)
       end
-
     end
-
   end
 
   # This section showcases the use of RSLT::Stylesheet#safe_helper.
@@ -117,13 +116,13 @@ describe "rslt" do
   describe 'safe processing' do
     before do
       module T800
-        def emit(label='(unlabeled)')
+        def emit(label = '(unlabeled)')
           add "#{label}: come with me if you want to live"
         end
       end
 
       module T1000
-        def emit(label='(unlabeled)')
+        def emit(label = '(unlabeled)')
           add "#{label}: say... that's a nice bike..."
         end
       end
@@ -132,15 +131,21 @@ describe "rslt" do
         def rules
           within 'bundle' do
             # if `safe_helper` was `helper`, we could `T800#emit` here
-            render('>text():first', w1th: :emit)  { child_content }
+            render('>text():first', w1th: :emit) { child_content }
 
             safe_helper T800 do
               # if `safe_helper` was `helper`, we would `T1000#emit` here
-              render('>parent')                   { emit('nested T800'); child_content }
+              render('>parent') do
+                emit('nested T800')
+                child_content
+              end
 
-              safe_helper T800, T1000  do
+              safe_helper T800, T1000 do
                 within '>parent' do
-                  render('>parent')               { emit('nested T1000'); child_content }
+                  render('>parent') do
+                    emit('nested T1000')
+                    child_content
+                  end
                 end
               end
               # if if `safe_helper` was `helper`, `emit` would be missing'
@@ -167,24 +172,27 @@ describe "rslt" do
       XML
     end
 
-    let(:results) { stylesheet.transform(xml.strip); stylesheet.builder }
+    let(:results) do
+      stylesheet.transform(xml.strip)
+      stylesheet.builder
+    end
 
     {
-      'T800'  => "come with me if you want to live",
+      'T800' => 'come with me if you want to live',
       'T1000' => "say... that's a nice bike"
     }.each_pair do |who, what|
       it "#{who} always says \"#{what}\"" do
-         hits = results.select {|r| r.include? what }
-         expect(hits).to eq hits.select {|h| h.include? who }
+        hits = results.select { |r| r.include? what }
+        expect(hits).to eq(hits.select { |h| h.include? who })
       end
     end
 
-    describe "error handling" do
+    describe 'error handling' do
       let(:xml) { '<parent><unexpected></unexpected></parent>' }
 
-      it "should record errors encountered during processing" do
+      it 'should record errors encountered during processing' do
         expect { results }.to raise_error do |error|
-          expect(error.message).to match /With selector '.*' and included modules: \[\]/
+          expect(error.message).to match(/With selector '.*' and included modules: \[\]/)
         end
       end
     end
