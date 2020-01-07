@@ -1,7 +1,7 @@
-require 'rspec'
-require 'rspec/autorun'
-require 'byebug'
+# frozen_string_literal: true
 
-$:.unshift(File.dirname(__FILE__) + '/../lib')
+require 'rspec'
+
+$LOAD_PATH.unshift(File.dirname(__FILE__) + '/../lib')
 require 'rslt'
 require 'support/matchers/dom_matcher'

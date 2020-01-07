@@ -1,0 +1,26 @@
+AllCops:
+  TargetRubyVersion: 2.6
+  Exclude:
+    - 'rslt.gemspec'
+  #   - 'config/**/*'
+  #   - 'db/**/*'
+  #   - 'script/**/*'
+  #   - 'support/**/*'
+  #   - 'target/**/*'
+  #   - 'typefi/**/*'
+
+Layout/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Metrics/ClassLength:
+  Max: 130
+
+Metrics/MethodLength:
+  Max: 15
+
+Style/Documentation:
+  Enabled: false

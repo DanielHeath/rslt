@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe RSLT::ElementWrapper do
-
   before do
     @stylesheet = Object.new
     @element = Object.new
@@ -9,14 +10,13 @@ describe RSLT::ElementWrapper do
     @wrapper = RSLT::ElementWrapper.new(@stylesheet, @element, @builder)
   end
 
-  describe "passing through method calls" do
-    describe "when an error is raised in a passed through call" do
-      it "should raise an error" do
-        lambda {
+  describe 'passing through method calls' do
+    describe 'when an error is raised in a passed through call' do
+      it 'should raise an error' do
+        expect do
           @wrapper.foo
-        }.should raise_exception
+        end.to raise_error(NoMethodError)
       end
     end
   end
-
 end
