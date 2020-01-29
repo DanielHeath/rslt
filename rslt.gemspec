@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = 'rslt'
-  s.version = '2.1.0'
+  s.version = '2.1.1'
 
   s.required_rubygems_version = Gem::Requirement.new('>= 2.2.0') if s.respond_to? :required_rubygems_version=
   s.authors = ['Daniel Heath']
@@ -76,7 +76,7 @@ Gem::Specification.new do |s|
   s.homepage = 'http://www.github.com/danielheath/rslt'
   s.rdoc_options = ['--charset=UTF-8', '-mREADME.md']
   s.require_paths = ['lib']
-  s.required_ruby_version = Gem::Requirement.new('>= 2.5')
+  s.required_ruby_version = Gem::Requirement.new('>= 2.4')
   s.summary = 'Helps you to transform XML without using XSLT.'
 
   if s.respond_to? :specification_version
