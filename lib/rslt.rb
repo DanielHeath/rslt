@@ -4,8 +4,8 @@ unless $LOAD_PATH.include?(File.dirname(__FILE__)) || $LOAD_PATH.include?(__dir_
   $LOAD_PATH.unshift(File.dirname(__FILE__))
 end
 
-module RSLT
-  VERSION = '2.1.1'
+module Rslt
+  VERSION = '3.0.0'
 end
 
 require 'rslt/stylesheet'

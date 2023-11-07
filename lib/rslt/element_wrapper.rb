@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module RSLT
+module Rslt
   class ElementWrapper
     attr_reader :element, :builder, :stylesheet
 

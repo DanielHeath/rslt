@@ -19,7 +19,7 @@ describe 'rslt' do
         end
       end
 
-      @stylesheet = Class.new(RSLT::Stylesheet) do
+      @stylesheet = Class.new(Rslt::Stylesheet) do
         def rules
           render('parent > child')     { builder.p(style: 'child_content') { child_content } }
           render('parent')             { builder.p(style: 'parent_content') { child_content } }
@@ -109,7 +109,7 @@ describe 'rslt' do
     end
   end
 
-  # This section showcases the use of RSLT::Stylesheet#safe_helper.
+  # This section showcases the use of Rslt::Stylesheet#safe_helper.
   # If you're interested in the origins of `safe_helper`, check out:
   # - https://trello.com/c/HVJmdbLz (LP access only)
   # - https://github.com/lonelyplanet/rslt/pull/2
@@ -127,7 +127,7 @@ describe 'rslt' do
         end
       end
 
-      class HelperClass < RSLT::Stylesheet
+      class HelperClass < Rslt::Stylesheet
         def rules
           within 'bundle' do
             # if `safe_helper` was `helper`, we could `T800#emit` here

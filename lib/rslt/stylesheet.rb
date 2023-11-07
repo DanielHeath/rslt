@@ -7,7 +7,7 @@ rescue StandardError
 end
 require 'builder'
 
-module RSLT
+module Rslt
   class Stylesheet
     attr_reader :builder, :errors
 

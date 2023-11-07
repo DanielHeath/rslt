@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module RSLT
+module Rslt
   class Rule
     attr_reader :stylesheet, :element, :block, :selector
 
